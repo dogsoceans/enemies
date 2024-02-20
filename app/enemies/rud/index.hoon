@@ -24,10 +24,11 @@
               ;div#status.green:"{(trip txt.u.msg)}"
             ;div#status.red:"{(trip txt.u.msg)}"
         ;ul
-         ;*  %-  head
+          ;*  %-  head
               %^  spin  enemies  0
               |=  [n=@t i=@ud]
               [(enemy i n) +(i)]
+        ==
         ;form(method "post")
           ;input(type "text", name "enemy", placeholder "demon king giri");
           ;input(type "submit", name "add", value "add");
@@ -35,13 +36,10 @@
       ==
     ==
   ::
-    ++  enemy
+  ++  enemy
     |=  [i=@ud n=@t]
     ;li
       ; {(trip n)}
-      ::  we include an "x" button, so that you can remove an enemy's name
-      ::  after you've eliminated them.
-      ::
       ;form(method "post")
         ;input(type "submit", name "del", value "x");
         ;input(type "hidden", name "index", value "{(scow %ud i)}");

@@ -35,7 +35,7 @@
   |=  old-state=vase
   ^-  (quip card _this)
   =/  old  !<(versioned-state old-state)
-  ?~  old  !!
+  ?~  old  `this(state old)
     `this(state old)
 
 ::
@@ -43,7 +43,7 @@
   |=  [=mark =vase]
   ^-  (quip card _this)
   ?>  =(%handle-http-request mark)
-    =;  out=(quip card:agent:gall enemies:sur)
+    =;  out=(quip card enemies:sur)
       [-.out this(state +.out)]
     %.  :+  bowl
           !<(order:rudder vase)
@@ -59,12 +59,21 @@
       |=  act=action:sur
       ^-  $@(@t [brief:rudder (list card:agent:gall) enemies:sur])
       ?-  -.act
-        %add  ``(snoc state enemy.act)
-        %del  ``(oust [index.act 1] state)
+        %add  ``(snoc enemies enemy.act)
+        %del  ``(oust [index.act 1] enemies)
     ==
   ==
 ::
-++  on-watch  on-watch:def
+++  on-watch  
+  |=  =path
+  ^-  (quip card _this)
+  ?+    path
+    (on-watch:def path)
+  ::
+      [%http-response *]
+    %-  (slog leaf+"Eyre subscribed to {(spud path)}." ~)
+    `this
+  ==
 ++  on-leave  on-leave:def
 ++  on-peek   on-peek:def
 ++  on-agent  on-agent:def

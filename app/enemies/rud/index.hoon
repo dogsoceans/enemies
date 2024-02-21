@@ -25,7 +25,7 @@
             ;div#status.red:"{(trip txt.u.msg)}"
         ;ul
           ;*  %-  head
-              %^  spin  enemies  0
+              %^  spin  enemies.enemies  0
               |=  [n=@t i=@ud]
               [(enemy i n) +(i)]
         ==
@@ -65,5 +65,5 @@
   |=  [success=? =brief:rudder]
   ^-  reply:rudder
   ?.  success  (build ~ `[| `@t`brief])
-  [%next 'page-example' brief]
+  [%next 'enemies' brief]
 --
